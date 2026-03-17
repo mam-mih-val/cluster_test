@@ -1,11 +1,9 @@
 #!/bin/bash
 
 #SBATCH -p 
-#SBATCH -a 1-999 
 #SBATCH -t 8:00:00
 #SBATCH -J tests
 #SBATCH -o /%A_%a.log
-#SBATCH --exclude=
 
 echo ${SLURMD_NODENAME}
 
