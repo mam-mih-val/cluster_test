@@ -19,12 +19,14 @@ int main( int argc, char* argv[] ){
   c->Update();
   c->Print( str_name.c_str() );
 
-  auto file = std::unique_ptr<TFile, std::function<void(TFile*)>>{ TFile::Open(str_name.c_str(), "read"), [](auto* f){ f->Close(); }};
+  auto file = std::unique_ptr<TFile, std::function<void(TFile*)>>{ TFile::Open( str_file_name.c_str(), "read"), [](auto* f){ f->Close(); }};
+  
   if( !file )
     return 9;
   TTree* tree{nullptr};
   file->GetObject( "t", tree );
   if( !tree )
     return 9;
+
   return 111;
 }
