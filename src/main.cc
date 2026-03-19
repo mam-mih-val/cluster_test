@@ -5,6 +5,7 @@
 #include <TCanvas.h>
 #include <TLatex.h>
 #include <TFile.h>
+#include <TTree.h>
 
 int main( int argc, char* argv[] ){
   auto str_name = std::string{ argv[1] }.append(".png");
@@ -21,6 +22,9 @@ int main( int argc, char* argv[] ){
   auto file = std::unique_ptr<TFile, std::function<void(TFile*)>>{ TFile::Open(str_name.c_str(), "read"), [](auto* f){ f->Close(); }};
   if( !file )
     return 9;
-
+  TTree* tree{nullptr};
+  file->GetObject( "t", tree );
+  if( !tree )
+    return 9;
   return 111;
 }
